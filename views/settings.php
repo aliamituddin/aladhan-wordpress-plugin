@@ -14,7 +14,7 @@ use AlAdhanApi\TimesByAddress;
     $latitudeMethod = esc_attr( get_option('prayer_times_latitude_adjustment_method') ) == '' ? '3' : esc_attr( get_option('prayer_times_latitude_adjustment_method') );
     $displayHeading = esc_attr( get_option('prayer_times_display_heading') ) == '' ? 'Prayer Times Today' :  esc_attr( get_option('prayer_times_display_heading') );
     $displayHeadingBgColour = esc_attr( get_option('prayer_times_display_heading_bg') );
-    $displayHeadingColour = esc_attr( get_option('prayer_times_display_heading_text') ); 
+    $displayHeadingColour = esc_attr( get_option('prayer_times_display_heading_text') );
     $prayerTimings = (new TimesByAddress($address, null, $method, $latitudeMethod, $school))->get();
     ?>
     
@@ -117,6 +117,34 @@ use AlAdhanApi\TimesByAddress;
                 </td>
             </tr>
         </table>
+        <h2>
+        Over-Write Computed Timings
+        </h2>
+            <p>
+                Please use the military time format. Example: 13:46 for 1:46 pm.
+            </p>
+        <table class="form-table">
+            <tr>
+                <th>Fajr</th>
+                <td><input type="text" name="prayer_times_override_fajr" value="<?php echo esc_attr( get_option('prayer_times_override_fajr') ); ?>" /></td>
+            </tr>
+            <tr>
+                <th>Zhuhr</th>
+                <td><input type="text" name="prayer_times_override_dhuhr" value="<?php echo esc_attr( get_option('prayer_times_override_dhuhr') ); ?>" /></td>
+            </tr>
+            <tr>
+                <th>Asr</th>
+                <td><input type="text" name="prayer_times_override_asr" value="<?php echo esc_attr( get_option('prayer_times_override_asr') ); ?>" /></td>
+            </tr>
+            <tr>
+                <th>Maghrib</th>
+                <td><input type="text" name="prayer_times_override_maghrib" value="<?php echo esc_attr( get_option('prayer_times_override_maghrib') ); ?>" /></td>
+            </tr>
+            <tr>
+                <th>Isha</th>
+                <td><input type="text" name="prayer_times_override_isha" value="<?php echo esc_attr( get_option('prayer_times_override_isha') ); ?>" /></td>
+            </tr>
+        </table>
 
         <?php submit_button(); ?>
 
@@ -131,7 +159,12 @@ use AlAdhanApi\TimesByAddress;
                         esc_attr( get_option('prayer_times_display_header_bg') ),
                         esc_attr( get_option('prayer_times_display_row_bg') ),
                         esc_attr( get_option('prayer_times_display_header_text') ),
-                        esc_attr( get_option('prayer_times_display_row_text') )
+                        esc_attr( get_option('prayer_times_display_row_text') ),
+                        esc_attr( get_option('prayer_times_override_fajr') ),
+                        esc_attr( get_option('prayer_times_override_dhuhr') ),
+                        esc_attr( get_option('prayer_times_override_asr') ),
+                        esc_attr( get_option('prayer_times_override_maghrib') ),
+                        esc_attr( get_option('prayer_times_override_isha') )
                        ); ?>
     
     

@@ -164,7 +164,7 @@ class Client {
                 $endpoint,
                 [
                     'headers' => ['Content-Type' => 'application/text'],
-                    'body' => json_encode($data, JSON_UNESCAPED_SLASHES),
+                    'query' => $data,
                     'verify' => false
                 ]
             );

@@ -56,7 +56,7 @@ class AlAdhanPlugin {
     
     public function loadMenu()
     {
-        add_menu_page('AlAdhan Plugin Settings', 'AlAdhan.com', 'editor', 'aladhan-settings', [$this, 'aladhan_settings_page'], 'dashicons-admin-generic');
+        add_menu_page('AlAdhan Plugin Settings', 'AlAdhan.com', 'manage_options', 'aladhan-settings', [$this, 'aladhan_settings_page'], 'dashicons-admin-generic');
     }
     
     public function aladhan_settings_page()
@@ -78,6 +78,11 @@ class AlAdhanPlugin {
         register_setting('aladhan-settings-group', 'prayer_times_display_heading');
         register_setting('aladhan-settings-group', 'prayer_times_display_heading_bg');
         register_setting('aladhan-settings-group', 'prayer_times_display_heading_text');
+		register_setting('aladhan-settings-group', 'prayer_times_override_fajr');
+		register_setting('aladhan-settings-group', 'prayer_times_override_dhuhr');
+		register_setting('aladhan-settings-group', 'prayer_times_override_asr');
+		register_setting('aladhan-settings-group', 'prayer_times_override_maghrib');
+		register_setting('aladhan-settings-group', 'prayer_times_override_isha');
     }
 
     
@@ -146,7 +151,12 @@ class AlAdhanPrayerTimesWidget extends WP_Widget {
                         esc_attr( get_option('prayer_times_display_header_bg') ),
                         esc_attr( get_option('prayer_times_display_row_bg') ),
                         esc_attr( get_option('prayer_times_display_header_text') ),
-                        esc_attr( get_option('prayer_times_display_row_text') )
+                        esc_attr( get_option('prayer_times_display_row_text') ),
+						esc_attr( get_option('prayer_times_override_fajr') ),
+                        esc_attr( get_option('prayer_times_override_dhuhr') ),
+                        esc_attr( get_option('prayer_times_override_asr') ),
+                        esc_attr( get_option('prayer_times_override_maghrib') ),
+                        esc_attr( get_option('prayer_times_override_isha') )
                        );
         
         echo $args['after_widget'];

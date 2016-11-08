@@ -2,7 +2,7 @@
 
 class Render {
     
-    public static function timings($format = 'horizontal', $prayerTimings, $displayHeadingBgColour, $displayHeadingColour, $displayHeading, $headerBg, $rowBg, $headerText, $rowText)
+    public static function timings($format = 'horizontal', $prayerTimings, $displayHeadingBgColour, $displayHeadingColour, $displayHeading, $headerBg, $rowBg, $headerText, $rowText, $fajr = '', $dhuhr = '', $asr = '', $maghrib = '', $isha = '')
     {
         if ($format == 'horizontal') { ?>
         <table class="aladhan-pt-table">
@@ -19,11 +19,11 @@ class Render {
                 <th style="">Isha</th>
             </tr>
             <tr class="aladhan-pt-row" style="background-color: <?= esc_attr( get_option('prayer_times_display_row_bg') ); ?>; color: <?= esc_attr( get_option('prayer_times_display_row_text') ); ?>;">
-                <td style=""><?=$prayerTimings['data']['timings']['Fajr']; ?></td>
-                <td style=""><?=$prayerTimings['data']['timings']['Dhuhr']; ?></td>
-                <td style=""><?=$prayerTimings['data']['timings']['Asr']; ?></td>
-                <td style=""><?=$prayerTimings['data']['timings']['Maghrib']; ?></td>
-                <td style=""><?=$prayerTimings['data']['timings']['Isha']; ?></td>
+                <td style=""><?=self::renderTime($prayerTimings, $fajr, 'Fajr'); ?></td>
+                <td style=""><?=self::renderTime($prayerTimings, $dhuhr, 'Dhuhr'); ?></td>
+                <td style=""><?=self::renderTime($prayerTimings, $asr, 'Asr'); ?></td>
+                <td style=""><?=self::renderTime($prayerTimings, $maghrib, 'Maghrib'); ?></td>
+                <td style=""><?=self::renderTime($prayerTimings, $isha, 'Isha'); ?></td>
             </tr>
         </table>
     <?php } else { ?>
@@ -35,26 +35,35 @@ class Render {
             </tr>
             <tr class="aladhan-pt-header" style="">
                 <th style="background-color: <?= $headerBg; ?>; color: <?= $headerText; ?>;">Fajr</th>
-                <td style="background-color: <?= $rowBg; ?>; color: <?= $rowText; ?>;"><?=$prayerTimings['data']['timings']['Fajr']; ?></td>
+                <td style="background-color: <?= $rowBg; ?>; color: <?= $rowText; ?>;"><?=self::renderTime($prayerTimings, $fajr, 'Fajr'); ?></td>
             </tr>
             <tr class="aladhan-pt-header" style="">
                 <th style="background-color: <?= $headerBg; ?>; color: <?= $headerText; ?>;">Zhuhr</th>
-                <td style="background-color: <?= $rowBg; ?>; color: <?= $rowText; ?>;"><?=$prayerTimings['data']['timings']['Dhuhr']; ?></td>
+                <td style="background-color: <?= $rowBg; ?>; color: <?= $rowText; ?>;"><?=self::renderTime($prayerTimings, $dhuhr, 'Dhuhr'); ?></td>
             </tr>
             <tr class="aladhan-pt-header" style="">
                 <th style="background-color: <?= $headerBg; ?>; color: <?= $headerText; ?>;">Asr</th>
-                <td style="background-color: <?= $rowBg; ?>; color: <?= $rowText; ?>;"><?=$prayerTimings['data']['timings']['Asr']; ?></td>
+                <td style="background-color: <?= $rowBg; ?>; color: <?= $rowText; ?>;"><?=self::renderTime($prayerTimings, $asr, 'Asr'); ?></td>
             </tr>
             <tr class="aladhan-pt-header" style="">
                 <th style="background-color: <?= $headerBg; ?>; color: <?= $headerText; ?>;">Maghrib</th>
-                <td style="background-color: <?= $rowBg; ?>; color: <?= $rowText; ?>;"><?=$prayerTimings['data']['timings']['Maghrib']; ?></td>
+                <td style="background-color: <?= $rowBg; ?>; color: <?= $rowText; ?>;"><?=self::renderTime($prayerTimings, $maghrib, 'Maghrib'); ?></td>
             </tr>
             <tr class="aladhan-pt-header" style="">
                 <th style="background-color: <?= $headerBg; ?>; color: <?= $headerText; ?>;">Isha</th>
-                <td style="background-color: <?= $rowBg; ?>; color: <?= $rowText; ?>;"><?=$prayerTimings['data']['timings']['Isha']; ?></td>
+                <td style="background-color: <?= $rowBg; ?>; color: <?= $rowText; ?>;"><?=self::renderTime($prayerTimings, $isha, 'Isha'); ?></td>
             </tr>
         </table>
     
     <?php }
+    }
+    
+    public static function renderTime($prayerTimings, $overwrite = '', $name)
+    {
+        if ($overwrite != '') {
+            return $overwrite;
+        } else {
+            return $prayerTimings['data']['timings'][$name];
+        }
     }
 }

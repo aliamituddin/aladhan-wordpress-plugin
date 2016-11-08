@@ -44,7 +44,7 @@ class TimesByAddress extends Client {
     {
         try {
             $r = $this->connect(Endpoints::TIMINGS_ADDRESS. '/' . $this->timestamp, $this->getParams());
-            
+
             return $r->json();
         } catch (Exception $e) {
             throw new Exception('Connection failed: ' . $e->getMessage(), $e->getCode());
